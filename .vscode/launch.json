@@ -1,0 +1,27 @@
+{
+    "coverMode": "count",
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Attach to Process",
+            "type": "go",
+            "request": "attach",
+            "mode": "local",
+            "processId": 0
+        },
+        {
+            "name": "Launch test with coverage",
+            "type": "go",
+            "request": "launch",
+            "mode": "test",
+            "program": "${workspaceFolder}",
+            "env": {
+                "GO111MODULE": "on",
+            },
+            "args": [
+                "-test.coverprofile",
+                "coverage.out"
+            ]
+        }
+    ]
+}

@@ -1,0 +1,11 @@
+mode: set
+github.com/semyenov/ss/main.go:14.43,18.38 3 1
+github.com/semyenov/ss/main.go:18.38,19.10 1 1
+github.com/semyenov/ss/main.go:20.27,22.7 2 1
+github.com/semyenov/ss/main.go:23.27,25.7 2 1
+github.com/semyenov/ss/main.go:26.11,31.7 3 1
+github.com/semyenov/ss/main.go:35.2,38.12 3 1
+github.com/semyenov/ss/main.go:41.45,42.20 1 1
+github.com/semyenov/ss/main.go:42.20,44.3 1 1
+github.com/semyenov/ss/main.go:46.2,50.27 4 1
+github.com/semyenov/ss/main.go:53.13,59.2 4 0
