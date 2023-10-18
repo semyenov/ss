@@ -4,6 +4,18 @@ import (
 	"fmt"
 )
 
+func MergeSortUniq(items []string) []string {
+	if len(items) < 2 {
+		return items
+	}
+
+	middle := len(items) / 2
+	left := MergeSortUniq(items[:middle])
+	right := MergeSortUniq(items[middle:])
+
+	return merge(left, right)
+}
+
 // merge merges two sorted slices of strings into a single sorted slice.
 //
 // The function takes two parameters:
@@ -38,16 +50,107 @@ func merge(left, right []string) []string {
 	return res
 }
 
-func MergeSortUniq(items []string) []string {
-	if len(items) < 2 {
-		return items
+// Difference calculates the difference between two sorted sets of strings.
+//
+// Parameters:
+//   - sortedSet1: a sorted set of strings.
+//   - sortedSet2: a sorted set of strings.
+//
+// Returns:
+// - []string: the difference between sortedSet1 and sortedSet2.
+func Difference(sortedSet1 []string, sortedSet2 []string) []string {
+	difference := []string{}
+
+	i, j := 0, 0
+	for i < len(sortedSet1) && j < len(sortedSet2) {
+		if sortedSet1[i] < sortedSet2[j] {
+			difference = append(difference, sortedSet1[i])
+			i++
+		} else if sortedSet1[i] > sortedSet2[j] {
+			j++
+		} else {
+			i++
+			j++
+		}
 	}
 
-	middle := len(items) / 2
-	left := MergeSortUniq(items[:middle])
-	right := MergeSortUniq(items[middle:])
+	return difference
+}
 
-	return merge(left, right)
+// Intersection finds the intersection of two sorted sets.
+//
+// Parameters:
+//   - sortedSet1: a sorted set of strings
+//   - sortedSet2: a sorted set of strings
+//
+// Returns:
+//   - a sorted set of strings representing the intersection of sortedSet1 and sortedSet2
+func Intersection(sortedSet1 []string, sortedSet2 []string) []string {
+	union := []string{}
+
+	i, j := 0, 0
+	for i < len(sortedSet1) && j < len(sortedSet2) {
+		if sortedSet1[i] < sortedSet2[j] {
+			i++
+		} else if sortedSet1[i] > sortedSet2[j] {
+			j++
+		} else {
+			union = append(union, sortedSet1[i])
+			i++
+			j++
+		}
+	}
+
+	return union
+}
+
+// Union takes two sorted sets of strings and returns their union.
+//
+// Parameters:
+//   - sortedSet1: the first sorted set of strings.
+//   - sortedSet2: the second sorted set of strings.
+//
+// Returns:
+//   - []string: the sorted union of the two sets.
+func Union(sortedSet1 []string, sortedSet2 []string) []string {
+	union := make([]string, 0)
+	i, j := 0, 0
+
+	for i < len(sortedSet1) && j < len(sortedSet2) {
+		if sortedSet1[i] < sortedSet2[j] {
+			if len(union) == 0 || sortedSet1[i] != union[len(union)-1] {
+				union = append(union, sortedSet1[i])
+			}
+			i++
+		} else if sortedSet1[i] > sortedSet2[j] {
+			if len(union) == 0 || sortedSet2[j] != union[len(union)-1] {
+				union = append(union, sortedSet2[j])
+			}
+			j++
+		} else {
+			if len(union) == 0 || sortedSet1[i] != union[len(union)-1] {
+				union = append(union, sortedSet1[i])
+			}
+			i++
+			j++
+		}
+	}
+
+	for i < len(sortedSet1) {
+		if len(union) == 0 || sortedSet1[i] != union[len(union)-1] {
+			union = append(union, sortedSet1[i])
+		}
+		i++
+	}
+
+	for j < len(sortedSet2) {
+		if len(union) == 0 || sortedSet2[j] != union[len(union)-1] {
+			union = append(union, sortedSet2[j])
+		}
+		j++
+	}
+
+	return union
 }
 
 func main() {
